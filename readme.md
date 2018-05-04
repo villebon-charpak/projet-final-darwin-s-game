@@ -9,7 +9,7 @@ on ferait des générations de raptors/de cubes qui sautent aléatoirement et ap
 
 ## Composition de l'équipe
 
-* membre 1 : Matthieu WAECKEL, responsable de :Game dev 
+* membre 1 : Matthieu WAECKEL, responsable de : Trouver comment générer une map aléatoirement
 * membre 2 : Lou VALLOGNES, responsable de :
 * membre 3 : Mickaël RENAUD, responsable de : 
 
