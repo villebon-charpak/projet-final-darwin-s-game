@@ -4,9 +4,9 @@ Created on Fri May  4 16:29:32 2018
 
 @author: etudiant
 """
-import numpy as np
-import random as rdm
 
+import random as rdm
+casedepart = 2
 posDino = 0
 en_vie = 1
 taille_map=40    #defini la longueur de la map
@@ -39,7 +39,7 @@ def print_MAP(liste, posDino): # covertisseur de texte en interface graphique
     if posDino == 0 :
         print("")
     else:
-        print(" "," ","°")
+        print("   "*(casedepart//2) + "°")
     print(s)
     
     
@@ -64,14 +64,14 @@ while not stop and en_vie:
     boucle = 1
     if posDino >= 1:
         posDino -= 1 #dino redescend
-    en_vie = GameOver(posDino,Map[9])
+    en_vie = GameOver(posDino,Map[casedepart+1])
     for i in range(taille_map-1):
         Map[i]= Map[i+1]
         
         if posDino == 0:
-            Map[4] = "R"
-        if Map[4] == "R":
-            for i in range(8):
+            Map[casedepart] = "R"
+        if Map[casedepart] == "R":
+            for i in range(casedepart):
                 Map[i]="terre"                
         else :
             Map[i]= Map[i+1] #décales toutes les entrées de la map vers la gauche
