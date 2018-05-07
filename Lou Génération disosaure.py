@@ -5,40 +5,38 @@ Created on Fri May  4 16:02:19 2018
 
 @author: etudiant
 """
-x = 0
-win = 0
 
-TDino = [0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,0,1]
-TMap = [0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,0,1]
+TDino = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+TMap = [0,1,0,0,1,0,0,1,0,1,0,1,0,1,1,0,0,1,0,1]
+state = 0
+NbCase = len(TMap)
 
-Nbcase = len(TMap)
-"""def GenNewDino(TDino,x):
-    for i in range(x,20):
+def GenNewDino(TDino,state,NbCase):
+    for i in range(state,NbCase):
         TDino[i]= randint(0,1)
         a = TDino[i]
         print(a)
-    return(TDino)"""
+    return(TDino)
         
-def TestDino1(TMap,TDino,Nbcase):
+def TestDino(TMap,TDino,Nbcase):
+    state = 0
     for i in range(Nbcase):
         if TMap[i] == 1:
             if TDino[i] != 1:
                 print("aie")
-                return(i)
-    if x == 0:
-        return(0)
+                state = i
+                break
+    return(state)
+               
+TDino = GenNewDino(TDino,state,NbCase)
+state = TestDino(TMap,TDino,NbCase)
 
-win = TestDino1(TMap,TDino,Nbcase)
-print(win)
-                
+while state != 0:
 
-
-"""while win==0:
-
-    TDino = GenNewDino(TDino,x)
-    TestDino1()"""
-
-
-
-
-
+    TDino = GenNewDino(TDino,state,NbCase)
+    state = TestDino(TMap,TDino,NbCase)
+    print(state)
+    
+print("Séquence trouvée!!!")
+for i in range(NbCase):
+    print(TDino[i])
