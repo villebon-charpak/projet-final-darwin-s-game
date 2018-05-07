@@ -7,6 +7,7 @@ Created on Fri May  4 16:29:32 2018
 
 import random as rdm
 casedepart = 2
+score = 2
 posDino = 0
 en_vie = 1
 taille_map=40    #defini la longueur de la map
@@ -39,7 +40,7 @@ def print_MAP(liste, posDino): # covertisseur de texte en interface graphique
     if posDino == 0 :
         print("")
     else:
-        print("   "*(casedepart//2) + "°")
+        print(" "*casedepart + "°")
     print(s)
     
     
@@ -75,7 +76,9 @@ while not stop and en_vie:
                 Map[i]="terre"                
         else :
             Map[i]= Map[i+1] #décales toutes les entrées de la map vers la gauche
-            
+    score += 10
+    score *= 1.445
+    score /=2.5       
     print (en_vie)  
     choix_terrain(Map)
     if en_vie == 0:
@@ -89,3 +92,4 @@ while not stop and en_vie:
     posDino = saut(sauter, posDino)
 
 print("Game Over")
+print("vous avez scoré",score,"!")
