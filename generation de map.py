@@ -12,19 +12,19 @@ en_vie = 1
 taille_map=40    #defini la longueur de la map
 stop=False       # bouléen pour stoper le programme
 boucle=1    #variable du while permettant de le break
-liste = ["terre"]*taille_map      #défini la map comme etant de la terre a t0
+Map = ["terre"]*taille_map      #défini la map comme etant de la terre a t0
 
 entry = ["cactus","terre","terre","terre","terre"] # défini les possibilitées de spawn
-def choix_terrain(liste): # fonction contenant les regles de generation de la map
-    liste[taille_map-1]= rdm.choice(entry)
-    if liste[taille_map-4:taille_map-1]== ["cactus"]*3:
-        liste[taille_map-1 ]="terre"
-    elif liste[taille_map-3:taille_map-1]== ["cactus","terre"]:
-        liste[taille_map-1]="terre"
-    elif liste [taille_map-4:taille_map-1]== ["cactus","terre","terre"]:
-        liste[taille_map-1]="terre"
-    elif liste[taille_map-5:taille_map-1]== ["cactus","terre","terre","terre"]:
-        liste[taille_map-1]="terre"
+def choix_terrain(Map): # fonction contenant les regles de generation de la map
+    Map[taille_map-1]= rdm.choice(entry)
+    if Map[taille_map-4:taille_map-1]== ["cactus"]*3:
+        Map[taille_map-1 ]="terre"
+    elif Map[taille_map-3:taille_map-1]== ["cactus","terre"]:
+        Map[taille_map-1]="terre"
+    elif Map [taille_map-4:taille_map-1]== ["cactus","terre","terre"]:
+        Map[taille_map-1]="terre"
+    elif Map[taille_map-5:taille_map-1]== ["cactus","terre","terre","terre"]:
+        Map[taille_map-1]="terre"
         
 def print_MAP(liste): # covertisseur de texte en interface graphique
     s=""
@@ -37,6 +37,8 @@ def print_MAP(liste): # covertisseur de texte en interface graphique
         elif terrain == "cactus" :
             s+="8"
     print(s)
+    
+    
 def saut(sauter, posDino):
     if sauter ==0:
         return posDino
@@ -53,33 +55,30 @@ def GameOver(posDino,terrain):
         return 1
     
     
-print (liste) #affichage de la map a t 0
+print (Map) #affichage de la map a t 0
 while not stop and en_vie:
     boucle = 1
     
     
     for i in range(taille_map-1):
         
-        en_vie = GameOver(posDino,liste[9])    
-    
+        en_vie = GameOver(posDino,Map[9])    
+        Map[i]= Map[i+1]
         if posDino == 0:
-            liste[8] = "R"
-        else :
-            liste[8] = liste[9]
-        if liste[8] == "R":
-            liste[i]= liste[i+1]
+            Map[8] = "R"
+        if Map[8] == "R":
             for i in range(8):
-                liste[i]="_"                
+                Map[i]="terre"                
         else :
-            liste[i]= liste[i+1] #décales toutes les entrées de la lite vers la gauche
+            Map[i]= Map[i+1] #décales toutes les entrées de la map vers la gauche
             
     print (en_vie)  
-    choix_terrain(liste)
+    choix_terrain(Map)
     if en_vie == 0:
         break 
     if posDino >= 1:
         posDino -= 1 # dino redescend
-    print_MAP(liste) #affichage de la map
+    print_MAP(Map) #affichage de la map
     choix = input()
     stop = ( choix == "stop")
     sauter =( choix == "sauter")
