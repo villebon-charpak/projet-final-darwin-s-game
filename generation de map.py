@@ -26,7 +26,7 @@ def choix_terrain(Map): # fonction contenant les regles de generation de la map
     elif Map[taille_map-5:taille_map-1]== ["cactus","terre","terre","terre"]:
         Map[taille_map-1]="terre"
         
-def print_MAP(liste): # covertisseur de texte en interface graphique
+def print_MAP(liste, posDino): # covertisseur de texte en interface graphique
     s=""
     for terrain in liste:
         if terrain == "R":
@@ -36,6 +36,10 @@ def print_MAP(liste): # covertisseur de texte en interface graphique
             s+="_"
         elif terrain == "cactus" :
             s+="8"
+    if posDino == 0 :
+        print("")
+    else:
+        print(" "," ","°")
     print(s)
     
     
@@ -58,15 +62,15 @@ def GameOver(posDino,terrain):
 print (Map) #affichage de la map a t 0
 while not stop and en_vie:
     boucle = 1
-    
-    
+    if posDino >= 1:
+        posDino -= 1 #dino redescend
+    en_vie = GameOver(posDino,Map[9])
     for i in range(taille_map-1):
-        
-        en_vie = GameOver(posDino,Map[9])    
         Map[i]= Map[i+1]
+        
         if posDino == 0:
-            Map[8] = "R"
-        if Map[8] == "R":
+            Map[4] = "R"
+        if Map[4] == "R":
             for i in range(8):
                 Map[i]="terre"                
         else :
@@ -76,9 +80,9 @@ while not stop and en_vie:
     choix_terrain(Map)
     if en_vie == 0:
         break 
-    if posDino >= 1:
-        posDino -= 1 # dino redescend
-    print_MAP(Map) #affichage de la map
+  
+    
+    print_MAP(Map, posDino) #affichage de la map
     choix = input()
     stop = ( choix == "stop")
     sauter =( choix == "sauter")
