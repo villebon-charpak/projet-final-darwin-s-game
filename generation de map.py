@@ -62,8 +62,9 @@ def choix_terrain_air(Map_air):  # fonction contenant les regles de generation d
         Map_air[taille_map - 1] = "air"
 
 
-def print_MAP(liste, posDino):  # covertisseur de texte en interface graphique
+def print_MAP(liste, Map_air,  posDino):  # covertisseur de texte en interface graphique
     s = ""
+    x = ""
     for terrain in liste:
         if terrain == "R":
             s += "R"
@@ -73,12 +74,8 @@ def print_MAP(liste, posDino):  # covertisseur de texte en interface graphique
         elif terrain == "cactus":
             s += "8"
 
-    print(s)
-
-def print_MAP_air(liste, posDino):  # covertisseur de texte en interface graphique
-    x = ""
-    for ciel in liste:
-        if posDino >=1 :
+    for ciel in Map_air:
+        if posDino >=1:
             Map_air[casedepart]= "°"
         else :
             Map_air[casedepart]= " "
@@ -91,8 +88,14 @@ def print_MAP_air(liste, posDino):  # covertisseur de texte en interface graphiq
             x += " "
         elif ciel == "oiseau":
             x += "-"
+        if ciel == "oiseau" and terrain == "cactus":
+            x += " "
 
     print(x)
+    print(s)
+
+
+
 
 
 def saut(posDino):
@@ -117,7 +120,7 @@ myfont = pygame.font.SysFont("monospace", 15)
 fenetre = pygame.display.set_mode((640, 480))
 vitesse = 600
 
-print(Map_air)
+
 print(Map)   # affichage de la map a t 0
 
 
@@ -126,8 +129,7 @@ while continuer:
         pygame.event.pump()
         keys = pygame.key.get_pressed()
         pygame.time.delay(vitesse)
-        print_MAP_air ( Map_air , posDino )
-        print_MAP ( Map , posDino )  # affichage de la map
+        print_MAP ( Map, Map_air, posDino )  # affichage de la map
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
@@ -160,9 +162,9 @@ while continuer:
                     Map[ i ] = "terre"
             else:
                 Map[ i ] = Map[ i + 1 ]
-        score += 10
-        score *= 1.885
-        score /= 1.803
+        score += 1
+        score *= 1.005
+
 
 
         choix_terrain_air (Map_air)
