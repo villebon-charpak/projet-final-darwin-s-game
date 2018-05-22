@@ -19,7 +19,7 @@ boucle = 1  # variable du while permettant de le break
 Map = ["terre"] * taille_map  # défini la map comme etant de la terre a t0
 entry = ["cactus", "terre", "terre", "terre", "terre"]  # défini les possibilitées de spawn
 Map_air = ["air"]* taille_map # la hauteur 1 est de l'air
-entry_air = ["oiseau","air","air","air","air","air","air","air","air"] # spawns aériens
+entry_air = ["oiseau","air","air","air","air","air","air","air"] # spawns aériens
 
 def choix_terrain(Map):  # fonction contenant les regles de generation de la map
     Map[taille_map - 1] = rdm.choice(entry)
@@ -35,9 +35,7 @@ def choix_terrain(Map):  # fonction contenant les regles de generation de la map
         Map[taille_map - 1] = "terre"
     elif Map[taille_map - 7:taille_map - 1] == ["cactus", "terre", "terre", "terre", "terre", "terre"]:
         Map[taille_map - 1] = "terre"
-    elif Map_air[taille_map] == ["oiseau"]:
-        Map[taille_map] = "terre"
-    elif Map_air[taille_map - 1] == ["oiseau"]:
+    if Map_air[taille_map - 1] == ["oiseau"]:
         Map[taille_map - 1] = "terre"
     elif Map_air[taille_map - 2:taille_map - 1] == ["oiseau"]:
         Map[taille_map - 1] = "terre"
@@ -48,10 +46,16 @@ def choix_terrain(Map):  # fonction contenant les regles de generation de la map
     elif Map_air[taille_map - 5:taille_map - 1] == ["oiseau", "air", "air", "air"]:
         Map[taille_map - 1] = "terre"
 
-def choix_terrain_air(Map_air):  # fonction contenant les regles de generation de la map
+def choix_terrain_air(Map_air):  # fonction contenant les regles de generation de la map air
     Map_air[taille_map - 1] = rdm.choice(entry_air)
-    if Map[taille_map - 2:taille_map - 1] == ["cactus"] :
-        Map_air[taille_map - 1] = "air"
+    if Map[taille_map - 2:taille_map - 1] == ["cactus"]:
+        Map_air[taille_map - 2] = "air"
+    elif Map[taille_map - 3:taille_map - 1] == ["cactus","terre"]:
+        Map_air[taille_map - 2] = "air"
+    elif Map[taille_map - 4:taille_map - 1] == ["cactus", "terre", "terre"]:
+        Map_air[taille_map - 2] = "air"
+    elif Map[taille_map - 5:taille_map - 1] == ["cactus","terre", "terre", "terre"]:
+        Map_air[taille_map - 2] = "air"
     if Map_air[taille_map - 2:taille_map - 1] == ["oiseau"]:
         Map_air[taille_map - 1] = "air"
     elif Map_air[taille_map - 3:taille_map - 1] == ["oiseau", "air"]:
@@ -101,7 +105,7 @@ def print_MAP(liste, Map_air,  posDino):  # covertisseur de texte en interface g
 
 
 
-def saut(posDino):
+def saut(posDino): # refle verifiant
     if posDino == 0:
         return 5
     else:
