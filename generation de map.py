@@ -8,7 +8,7 @@ import pygame
 import random as rdm
 from pygame.locals import *
 pygame.init()
-
+clock = pygame.time.Clock()
 casedepart = 2
 score = 2
 posDino = 0
@@ -20,6 +20,15 @@ Map = ["terre"] * taille_map  # défini la map comme etant de la terre a t0
 entry = ["cactus", "terre", "terre", "terre", "terre"]  # défini les possibilitées de spawn
 Map_air = ["air"]* taille_map # la hauteur 1 est de l'air
 entry_air = ["oiseau","air","air","air","air","air","air","air"] # spawns aériens
+
+pygame.display.set_caption('font example')
+size = [640, 480]
+screen = pygame.display.set_mode(size)
+basicfont = pygame.font.SysFont(None, 48)
+
+
+
+
 
 def choix_terrain(Map):  # fonction contenant les regles de generation de la map
     Map[taille_map - 1] = rdm.choice(entry)
@@ -68,10 +77,10 @@ def choix_terrain_air(Map_air):  # fonction contenant les regles de generation d
         Map_air[taille_map - 1] = "air"
 
 
-def print_MAP(liste, Map_air,  posDino):  # covertisseur de texte en interface graphique
+def print_MAP(Map, Map_air,  posDino):  # covertisseur de texte en interface graphique
     s = ""
     x = ""
-    for terrain in liste:
+    for terrain in Map :
         if terrain == "R":
             s += "R"
 
@@ -98,10 +107,7 @@ def print_MAP(liste, Map_air,  posDino):  # covertisseur de texte en interface g
             x += "-"
 
 
-    print(x)
-    print(s)
-
-
+    return x,s
 
 
 
@@ -172,16 +178,31 @@ while continuer:
         score += 1
         score *= 1.005
 
+        chaine_map, chaine_ciel = print_MAP(Map , Map_air,  posDino)
+        text_map = basicfont.render(str(chaine_map), True, (0, 0,0), (255, 255, 255))
+        text_air = basicfont.render(str(chaine_ciel), True, (0, 0,0), (255, 255, 255))
+        textrect_air = text_air.get_rect()
+        textrect_map = text_map.get_rect()
+        textrect_air.centerx = screen.get_rect().centerx+20
+        textrect_air.centery = screen.get_rect().centery+25
+        textrect_map.centerx = screen.get_rect().centerx-130
+        textrect_map.centery = screen.get_rect().centery
 
+        screen.fill((255, 255, 255))
+        screen.blit(text_map, textrect_map)
+        screen.blit(text_air, textrect_air)
 
+        pygame.display.update()
+        clock.tick(20)
         choix_terrain_air (Map_air)
         choix_terrain ( Map )
+
 
         label = myfont.render("s", 1, (255,255,255))
         if en_vie == 0:
             continuer = 0
             break
-        vitesse -= 2
+        vitesse -= 3
 
 
 
