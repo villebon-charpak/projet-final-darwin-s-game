@@ -35,6 +35,8 @@ def choix_terrain(Map):  # fonction contenant les regles de generation de la map
         Map[taille_map - 1] = "terre"
     elif Map[taille_map - 7:taille_map - 1] == ["cactus", "terre", "terre", "terre", "terre", "terre"]:
         Map[taille_map - 1] = "terre"
+    elif Map_air[taille_map] == ["oiseau"]:
+        Map[taille_map] = "terre"
     elif Map_air[taille_map - 1] == ["oiseau"]:
         Map[taille_map - 1] = "terre"
     elif Map_air[taille_map - 2:taille_map - 1] == ["oiseau"]:
@@ -75,6 +77,8 @@ def print_MAP(liste, Map_air,  posDino):  # covertisseur de texte en interface g
             s += "8"
 
     for ciel in Map_air:
+        if ciel == "oiseau" and terrain == "cactus":
+            ciel = "air"
         if posDino >=1:
             Map_air[casedepart]= "°"
         else :
@@ -88,8 +92,7 @@ def print_MAP(liste, Map_air,  posDino):  # covertisseur de texte en interface g
             x += " "
         elif ciel == "oiseau":
             x += "-"
-        if ciel == "oiseau" and terrain == "cactus":
-            x += " "
+
 
     print(x)
     print(s)
