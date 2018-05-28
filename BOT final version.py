@@ -191,8 +191,8 @@ def GameOver(posDino, terrain, ciel ):
 
 
 
-nombre_gene=10
-taille_test=10
+nombre_gene=50
+taille_test=20
 liste_test=[0]*taille_test
 liste_poids=crea_liste_de_liste()
 liste_poids_gene=premiers_poids()

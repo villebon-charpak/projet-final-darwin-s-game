@@ -14,5 +14,19 @@ on ferait des générations de raptors/de cubes qui sautent aléatoirement et ap
 * membre 3 : Mickaël RENAUD, responsable de : recherche machine learning et application python
 
 
+### mickael:
+
+pour les versions bot:
+
+-pour la version compatible interface graphique ('texte sur fenêtre pygame'), la fenêtre pygame freeze assez souvent mieux vaut ne pas l'ouvrir entièrement
+-la version finale integre: 
+--> un algorithme generationnel: on peut changer le nombre de generations et d'individus par generations,
+les  generations sont en partie générées à partir des précédentes.
+--> un recap des resultats de la generations, avec les 2 meilleurs individus, les poids associés etc... (fonctionnement cohérent et vérifié :) )
+--> basé sur un système de reseaux neuronaux dont on peut changer le 'facteur déterminant' 
+
+ATTENTION: pour le moment seule la version finale (BOT VF) est en partie commentée pour ce qui concerne les blocks et fonctions 'bot': algo génétique // réseaux neuronaux 
+la partie génération de map est elle en partie commentée dans tout les codes
+
 
 
