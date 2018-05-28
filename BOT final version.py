@@ -317,6 +317,9 @@ for b in range (nombre_gene):
                 #label = myfont.render("s", 1, (255,255,255))
                 if en_vie == 0:
                     continuer = 0
+                if score>10000:
+                    print([poids_distance,poids_largeur_cactus,poids_distance2])
+                    break
                     
                 #vitesse -= 3
                 #time.sleep(0.1)#delai pour plus de clartée
