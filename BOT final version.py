@@ -319,19 +319,18 @@ for b in range (nombre_gene):
                     continuer = 0
                     
                 #vitesse -= 3
-                time.sleep(0.1)#delai pour plus de clartée
+                #time.sleep(0.1)#delai pour plus de clartée
         #on stock les poids et le score de l'individu
         liste_poids[a]=[poids_distance,poids_largeur_cactus,poids_distance2]
         liste_test[a]=score
         print ( "Game Over" )
         print ( "vous avez scoré" , score , "!" )
-        time.sleep(2)#delai pour plus de clartée
+       # time.sleep(2)#delai pour plus de clartée
         
     
             
     print('             Resultats de la generation', b+1)    
     print(liste_test)
-    print(liste_poids)
     print('the best scored:',max(liste_test))
     print('with weight:',liste_poids[indice_seaker()])
     i_1=indice_seaker()
@@ -346,7 +345,7 @@ for b in range (nombre_gene):
     if b!=nombre_gene-1:
         print('lets move to generation',b+2)
         croisement_genome()
-        time.sleep(10) #delai pour plus de clartée
+        #time.sleep(10) #delai pour plus de clartée
 
     
 print('the end')
