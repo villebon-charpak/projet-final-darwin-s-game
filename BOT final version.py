@@ -51,7 +51,7 @@ def distance_next_cactus(liste_map):#calcul la distance au prochain cactus
 
 def choix_robot(Map):# le robot saute ou non en fonction du resultat de la sortie du reseau neuronal
     if posDino == 0:
-        if poids_distance*distance_bis + poids_largeur_cactus*largeur_cactus + poids_distance2*distance2_bis > 1.5:
+        if poids_distance*distance_bis + poids_largeur_cactus*largeur_cactus + poids_distance2*distance2_bis < 1.4:
             return K_SPACE
         else:
             return 'nothing'
@@ -78,14 +78,14 @@ def crea_liste_de_liste():#cree une liste de liste (sans le probleme: T=[L,L,L,L
     return L
 
 def croisement_genome():#defini les prochains poids a partir des poids de la gene precedente
-    for j in range(taille_test-5):
+    for j in range(taille_test):
         liste_poids_gene[j][0]=((liste_poids[i_1][0]+liste_poids[i_2][0])/2)+(rdm.randint(-100,100)/1000)
         liste_poids_gene[j][1]=((liste_poids[i_1][1]+liste_poids[i_2][1])/2)+(rdm.randint(-100,100)/1000)
         liste_poids_gene[j][2]=((liste_poids[i_1][2]+liste_poids[i_2][2])/2)+(rdm.randint(-100,100)/1000)
-    for i in range(5):
-        liste_poids_gene[-(i+1)][0]=rdm.randint(0,1000)/1000
-        liste_poids_gene[-(i+1)][1]=rdm.randint(0,1000)/1000
-        liste_poids_gene[-(i+1)][2]=rdm.randint(0,1000)/1000
+    #for i in range(5):
+      #  liste_poids_gene[-(i+1)][0]=rdm.randint(0,1000)/1000
+      #  liste_poids_gene[-(i+1)][1]=rdm.randint(0,1000)/1000
+      #  liste_poids_gene[-(i+1)][2]=rdm.randint(0,1000)/1000
         
 
 def choix_terrain(Map):  # fonction contenant les regles de generation de la map
@@ -191,7 +191,7 @@ def GameOver(posDino, terrain, ciel ):
 
 
 
-nombre_gene=50
+nombre_gene=100
 taille_test=20
 liste_test=[0]*taille_test
 liste_poids=crea_liste_de_liste()
